@@ -9,8 +9,10 @@ import java.awt.event.ActionListener;
 public class MenuBar {
     JMenuBar mb;
     Container c;
-    MenuBar(Container c) {
+    MyLabel ml;
+    MenuBar(Container c, MyLabel ml) {
         this.c = c;
+        this.ml = ml;
         mb = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
         JMenuItem openItem = new JMenuItem("Open");
@@ -33,13 +35,16 @@ public class MenuBar {
             if(ret != JFileChooser.APPROVE_OPTION){
                 JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다.",
                         "Warning", JOptionPane.WARNING_MESSAGE);
+                ml.ErrorLabel();
                 return;
             }
             String path = chooser.getSelectedFile().getPath();
             MyPanel panel = new MyPanel(path);
             c.add(panel);
-            panel.setLocation(30,30);
-            panel.setSize(500,500);
+            panel.setLocation(50,50);
+            panel.setSize(900,670);
+
+            ml.LoadImage();
         }
     }
 }
